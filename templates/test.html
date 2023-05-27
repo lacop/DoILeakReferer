@@ -1,31 +1,80 @@
-<html>
+<!doctype html>
+<html lang=en>
 
 <head>
+    <meta charset=utf-8>
+    <title>Do I leak Refer(r)er?</title>
     <style>
-        div {
-            border: 1px solid red;
-            padding: 2em;
+        /* TODO: This should be more responsive. */
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .intro,
+        .item {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .intro {
+            margin: 0 auto;
+        }
+
+        .item {
+            margin: 1em auto;
+            padding: 1em 0.5em;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .label {
+            display: inline-block;
+            font-size: 2em;
+            font-family: monospace;
+            width: 45%;
         }
 
         img {
-            border: 1px solid orange;
-            width: 300px;
+            width: 45%;
         }
     </style>
 </head>
 
 <body>
-    <div>
-        unsafe-url
-        <img src="/image/a" referrerpolicy="unsafe-url" />
-    </div>
-    <div>
-        origin
-        <img src="/image/b" referrerpolicy="origin" />
-    </div>
-    <div>
-        no-referrer
-        <img src="/image/c" referrerpolicy="no-referrer" />
+    <div class="container">
+        <div class="intro">
+            <h1>Do I Leak Refer(r)er? - Test page</h1>
+            <a href="/">Back to homepage</a>
+            <p>
+                This shows embedded <code>&lt;img&gt;</code> elements
+                with different <code>referrerpolicy</code>.
+            </p>
+            <p>
+                Check out <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns">MDN</a>
+                to learn more
+            </p>
+        </div>
+        <!-- TODO: We could do 2D grid, with domain/scheme on the other axis. -->
+        {% for (i, policy) in [
+        "no-referrer",
+        "no-referrer-when-downgrade",
+        "origin",
+        "origin-when-cross-origin",
+        "same-origin",
+        "strict-origin",
+        "strict-origin-when-cross-origin",
+        "unsafe-url"
+        ].iter().enumerate() %}
+        <div class="item">
+            <span class="label">{{ policy }}</span>
+            <img src="/image/{{i}}" referrerpolicy="{{policy}}" />
+        </div>
+        {% endfor %}
     </div>
 </body>
 
