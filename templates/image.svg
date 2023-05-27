@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+      <!--
+      Colors are from https://m1.material.io/style/color.html.
+      Using "100" for background, "800" for border.
+      -->
+      rect.good {
+            <!-- Light green. -->
+            fill: #DCEDC8;
+            stroke: #558B2F;
+      }
+
+      rect.bad {
+            <!-- Amber. -->
+            fill: #FFECB3;
+            stroke: #FF8F00;
+      }
+
+      text {
+            <!-- Text is "Grey 800". -->
+            fill: #424242;
+            stroke: #424242;
+            font-size: 1em;
+      }
+
+      text.heading { font-size: 1.6em; }
+
+      text.url { font-family: monospace; }
+</style>
+
+{% match referrer %}
+
+{% when Referrer::NotPresent %}
+
+      <rect x="10" y="10" width="380" height="130" rx="5" ry="5" class="good"/>
+      <text x="25" y="50" class="heading">
+      &#x2705; No, it looks like you don't!
+      </text>
+      <text x="25" y="100">
+      Your browser didn't set any referer header.
+      </text>
+
+{% else %}
+
+      <rect x="10" y="10" width="380" height="130" rx="5" ry="5" class="bad"/>
+      <text x="25" y="50" class="heading">
+      &#9888;&#65039; Yes, it looks like you do!
+      </text>
+      <text x="25" y="90">
+      Referer header your browser sent:
+      </text>
+
+      {% if let Referrer::Present(r) = referrer %}
+            <text x="25" y="110" class="url">
+            {{r}}
+            </text>
+      {% else %}
+            <text x="25" y="110">
+            (Invalid UTF-8 sequence)
+            </text>
+      {% endif %}
+
+{% endmatch %}
+
+</svg>

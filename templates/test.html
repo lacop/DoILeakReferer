@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <style>
+        div {
+            border: 1px solid red;
+            padding: 2em;
+        }
+
+        img {
+            border: 1px solid orange;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        unsafe-url
+        <img src="http://localhost:8080/image/a" referrerpolicy="unsafe-url" />
+    </div>
+    <div>
+        origin
+        <img src="http://localhost:8080/image/b" referrerpolicy="origin" />
+    </div>
+    <div>
+        no-referrer
+        <img src="http://localhost:8080/image/c" referrerpolicy="no-referrer" />
+    </div>
+</body>
+
+</html>
