@@ -4,18 +4,17 @@
 <head>
     <meta charset=utf-8>
     <title>Do I leak Refer(r)er?</title>
-    <style>
-
-    </style>
 </head>
 
 <body>
     <h1>Do I Leak Refer(r)er?</h1>
 
-    <p>Go to <a href="/test">the test page</a>.</p>
+    <p style="font-size: 120%;">Go to <a href="/test">the test page</a>.</p>
 
     <p>
-        Simple utility website to help you verify if you are leaking referrer headers.
+        A simple website to check if your browser is sending the <code>Referer</code> header.
+    </p>
+    <p>
         See <a
             href="https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns">MDN</a>
         for background and more info.
@@ -28,6 +27,10 @@
     </p>
 
     <img src="/image/index" />
+
+    <p>
+        View source on <a href="https://github.com/lacop/DoILeakReferer">GitHub</a>
+    </p>
 </body>
 
 </html>
