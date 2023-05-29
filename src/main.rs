@@ -3,7 +3,9 @@ use warp::Filter;
 
 #[derive(Template)]
 #[template(path = "index.html")]
-struct IndexTemplate;
+struct IndexTemplate {
+    git_version: &'static str,
+}
 
 #[derive(Template)]
 #[template(path = "test.html")]
@@ -40,7 +42,9 @@ async fn main() {
         .and(warp::filters::header::headers_cloned())
         .map(image);
     let test = warp::path("test").map(|| TestTemplate {});
-    let index = warp::any().map(|| IndexTemplate {});
+    let index = warp::any().map(|| IndexTemplate {
+        git_version: git_version::git_version!(),
+    });
 
     // TODO: Switch between image or index for root based on accept header?
     let routes = image.or(test).or(index);
