@@ -2,7 +2,7 @@
 
 A simple website to check if your browser is sending the `Referer` header.
 
-Hosted at DoILeakReferer.com and DoILeakReferrer.com.
+Hosted at https://DoILeakReferer.com and https://DoILeakReferrer.com.
 
 ## Local development
 
@@ -21,6 +21,10 @@ Simply `fly deploy` from this directory.
 ## Why two domains?
 
 Well, the authors of the `Referer` spec spelled it wrong :) But two domains also allow testing cross-origin behavior.
+
+## What is this for?
+
+Probably nothing to be honest. I just had this idea one day and wanted to try out fly.io for a long time, so I figured why not build it.
 
 ## TODO
 
