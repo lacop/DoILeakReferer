@@ -31,3 +31,7 @@ Probably nothing to be honest. I just had this idea one day and wanted to try ou
 This is a tiny project which I would consider done, but there is one improvement I would like: 
 
 Serve the image instead of index when Accept headers indicates this was used as `<img src="https://doileakreferer.com"/>`. This avoids the need for `/image` path.
+
+## License
+
+MIT
