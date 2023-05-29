@@ -28,7 +28,6 @@ Probably nothing to be honest. I just had this idea one day and wanted to try ou
 
 ## TODO
 
-This is a tiny project which I would consider done, but there are two improvements I would like:
+This is a tiny project which I would consider done, but there is one improvement I would like: 
 
-- Serve the image instead of index when Accept headers indicates this was used as `<img src="https://doileakreferer.com"/>`. This avoids the need for `/image` path.
-- Show the git hash from which the Fly image was built & deployed.
+Serve the image instead of index when Accept headers indicates this was used as `<img src="https://doileakreferer.com"/>`. This avoids the need for `/image` path.
