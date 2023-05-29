@@ -45,7 +45,11 @@ async fn main() {
     // TODO: Switch between image or index for root based on accept header?
     let routes = image.or(test).or(index);
 
+    let port = std::env::var("PORT")
+        .ok()
+        .and_then(|x| x.parse::<u16>().ok())
+        .unwrap_or(8080);
     warp::serve(routes)
-        .run((std::net::Ipv6Addr::UNSPECIFIED, 8080))
+        .run((std::net::Ipv6Addr::UNSPECIFIED, port))
         .await;
 }
