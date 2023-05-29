@@ -12,34 +12,55 @@
             width: 100%;
         }
 
-        .intro,
-        .item {
-            width: 90%;
-            max-width: 700px;
-        }
-
         .intro {
+            max-width: 80%;
+        }
+
+        table {
+            max-width: 90%;
+        }
+
+        .intro,
+        table {
             margin: 0 auto;
+            border-collapse: collapse;
         }
 
-        .item {
-            margin: 1em auto;
-            padding: 1em 0.5em;
-            border: 1px solid black;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        tr {
+            font-size: 130%;
         }
 
-        .label {
-            display: inline-block;
-            font-size: 2em;
-            font-family: monospace;
-            width: 45%;
+        tr a {
+            font-size: 80%;
+            color: black;
+        }
+
+        td {
+            width: 20%;
         }
 
         img {
-            width: 45%;
+            width: 100%;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #CFD8DC;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ECEFF1;
+        }
+
+        tr:first-child {
+            background-color: #B0BEC5;
+        }
+
+        tr:first-child th {
+            padding: 0.5em 0;
+        }
+
+        tr:not(:first-child):hover {
+            background-color: #B2DFDB;
         }
     </style>
 </head>
@@ -52,6 +73,7 @@
             <p>
                 This shows embedded <code>&lt;img&gt;</code> elements
                 with different <code>referrerpolicy</code>.
+                We use two domains, so the <code>origin</code> is different.
             </p>
             <p>
                 Check out <a
@@ -59,22 +81,39 @@
                 to learn more
             </p>
         </div>
-        <!-- TODO: We could do 2D grid, with domain/scheme on the other axis. -->
-        {% for (i, policy) in [
-        "no-referrer",
-        "no-referrer-when-downgrade",
-        "origin",
-        "origin-when-cross-origin",
-        "same-origin",
-        "strict-origin",
-        "strict-origin-when-cross-origin",
-        "unsafe-url"
-        ].iter().enumerate() %}
-        <div class="item">
-            <span class="label">{{ policy }}</span>
-            <img src="/image/{{i}}" referrerpolicy="{{policy}}" />
-        </div>
-        {% endfor %}
+        <table>
+            <tr>
+                <th><code>referrerpolicy</code></th>
+                <th><a href="http://doileakreferer.com">http://doileakreferer.com</a></th>
+                <th><a href="https://doileakreferer.com">http://doileakreferer.com</a></th>
+                <th><a href="http://doileakreferer.com">http://doileakreferrer.com</a></th>
+                <th><a href="https://doileakreferer.com">http://doileakreferrer.com</a></th>
+            </tr>
+            {% for (i, policy) in [
+            "no-referrer",
+            "no-referrer-when-downgrade",
+            "origin",
+            "origin-when-cross-origin",
+            "same-origin",
+            "strict-origin",
+            "strict-origin-when-cross-origin",
+            "unsafe-url"
+            ].iter().enumerate() %}
+            <tr>
+                <th><code>{{policy}}</code></th>
+                {% for (j, domain) in [
+                "http://doileakreferer.com",
+                "https://doileakreferer.com",
+                "http://doileakreferer.com",
+                "https://doileakreferrer.com"
+                ].iter().enumerate() %}
+                <td>
+                    <img src="{{domain}}/image/{{i}}/{{j}}" referrerpolicy="{{policy}}" />
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </body>
 
